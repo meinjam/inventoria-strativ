@@ -20,7 +20,8 @@ const Products = async ({ query, currentPage, priceMin, priceMax, categorySlug }
     return (
       <>
         <ProductTable products={products} />
-        <CustomPagination />
+
+        {products.length > 0 && <CustomPagination />}
       </>
     );
   } catch (error) {

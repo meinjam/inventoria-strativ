@@ -87,6 +87,14 @@ const ProductTable = ({ products }: Props) => {
           </tr>
         </thead>
         <tbody className='divide-y divide-gray-200'>
+          {filteredProducts.length === 0 && (
+            <tr>
+              <td colSpan={5} className='px-3 py-5 whitespace-nowrap text-center'>
+                <span className='text-gray-500'>Sorry, no products found</span>
+              </td>
+            </tr>
+          )}
+
           {filteredProducts.map((product) => (
             <tr key={product.id} className='*:text-gray-900 *:first:font-medium'>
               <td className='px-3 py-2 whitespace-nowrap'>
