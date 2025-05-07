@@ -1,10 +1,27 @@
 import { Product } from '@/types';
-import { baseUrl } from '@/utils/constants';
+import { baseUrl, paginationLimit } from '@/utils/constants';
 
-export async function getProducts(page: string | string[], query: string | string[], limit = 10): Promise<Product[]> {
-  const response = await fetch(`${baseUrl}/products?offset=${page}&limit=${limit}&title=${query}`, {
+export async function getProducts(
+  page: string,
+  query?: string,
+  priceMin?: string,
+  priceMax?: string,
+  categorySlug?: string
+): Promise<Product[]> {
+  const params = new URLSearchParams();
+
+  params.append('offset', ((Number(page) - 1) * paginationLimit).toString());
+  params.append('limit', paginationLimit.toString());
+  if (query) params.append('title', query);
+  if (priceMin) params.append('price_min', priceMin.toString());
+  if (priceMax) params.append('price_max', priceMax.toString());
+  if (categorySlug) params.append('categorySlug', categorySlug);
+
+  const response = await fetch(`${baseUrl}/products?${params.toString()}`, {
     cache: 'no-store', // Disable caching
   });
+
+  console.log(response.url);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`);

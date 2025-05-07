@@ -5,13 +5,16 @@ import ProductTable from '@/components/homepage/ProductTable.Component';
 import CustomPagination from '../reusable/CustomPagination.Component';
 
 type Props = {
-  query: string | string[];
-  currentPage: string | string[];
+  query: string;
+  currentPage: string;
+  priceMin: string;
+  priceMax: string;
+  categorySlug: string;
 };
 
-const Products = async ({ query, currentPage }: Props) => {
+const Products = async ({ query, currentPage, priceMin, priceMax, categorySlug }: Props) => {
   try {
-    const products = await getProducts(currentPage, query);
+    const products = await getProducts(currentPage, query, priceMin, priceMax, categorySlug);
     // console.log(products);
 
     return (

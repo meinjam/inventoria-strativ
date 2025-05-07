@@ -5,10 +5,15 @@ import { CiSearch } from 'react-icons/ci';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 
-const Search = ({ placeholder }: { placeholder: string }) => {
+type Props = {
+  placeholder: string;
+  query?: string;
+};
+
+const Search = ({ placeholder, query }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const { push } = useRouter();
 
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
@@ -21,7 +26,7 @@ const Search = ({ placeholder }: { placeholder: string }) => {
       params.delete('page');
     }
 
-    replace(`${pathname}?${params.toString()}`);
+    push(`${pathname}?${params.toString()}`);
   }, 500);
 
   return (
@@ -36,7 +41,7 @@ const Search = ({ placeholder }: { placeholder: string }) => {
           onChange={(e) => {
             handleSearch(e.target.value);
           }}
-          defaultValue={searchParams.get('query')?.toString()}
+          defaultValue={query?.toString()}
         />
         <CiSearch className='absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900' />
       </div>

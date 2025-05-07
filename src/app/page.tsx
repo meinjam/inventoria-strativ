@@ -4,22 +4,37 @@ import ProductsLoading from '@/components/loading/Products.Loading';
 import { Suspense } from 'react';
 
 type Props = {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{
+    query: string;
+    page: string;
+    priceMin: string;
+    priceMax: string;
+    categorySlug: string;
+  }>;
 };
 
 export default async function Home({ searchParams }: Props) {
   const query = (await searchParams).query || '';
   const currentPage = (await searchParams).page || '1';
-  console.log(currentPage);
-  console.log(query);
+  const priceMin = (await searchParams).priceMin || '';
+  const priceMax = (await searchParams).priceMax || '';
+  const categorySlug = (await searchParams).categorySlug || '';
+
+  // console.log(currentPage, query, priceMin, priceMax, categorySlug);
 
   return (
     <section className='my-10'>
       <div className='container'>
         <h1 className='text-3xl font-bold mb-4'>Products</h1>
-        <Search placeholder='Search product...' />
-        <Suspense fallback={<ProductsLoading />} key={`${query}_${currentPage}`}>
-          <Products query={query} currentPage={currentPage} />
+        <Search placeholder='Search by name...' query={query} />
+        <Suspense fallback={<ProductsLoading />} key={query + currentPage + priceMin + priceMax + categorySlug}>
+          <Products
+            query={query}
+            currentPage={currentPage}
+            priceMin={priceMin}
+            priceMax={priceMax}
+            categorySlug={categorySlug}
+          />
         </Suspense>
       </div>
     </section>
