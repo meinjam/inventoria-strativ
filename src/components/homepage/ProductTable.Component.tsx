@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import React from 'react';
 import { LuEye } from 'react-icons/lu';
-import CustomImage from '@/components/reusable/CustomImage.Component';
 import Image from 'next/image';
 
 interface Props {
