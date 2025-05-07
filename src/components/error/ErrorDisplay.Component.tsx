@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import React from 'react';
+import { BsShieldExclamation } from 'react-icons/bs';
 
 interface ErrorDisplayProps {
   message: string;
@@ -6,28 +8,18 @@ interface ErrorDisplayProps {
 
 const ErrorDisplay = ({ message }: ErrorDisplayProps) => {
   return (
-    <div className='rounded-lg bg-red-50 p-6 border border-red-200'>
-      <div className='flex flex-col items-center text-center'>
-        <div className='h-12 w-12 rounded-full bg-red-100 flex items-center justify-center mb-4'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-red-500'
-          >
-            <circle cx='12' cy='12' r='10' />
-            <line x1='12' y1='8' x2='12' y2='12' />
-            <line x1='12' y1='16' x2='12.01' y2='16' />
-          </svg>
+    <div className='rounded-xl border border-red-300 bg-red-50 p-6 ring-1 ring-red-100'>
+      <div className='flex flex-col items-center text-center space-y-3'>
+        <div className='h-14 w-14 rounded-full bg-red-100 flex items-center justify-center animate-pulse'>
+          <BsShieldExclamation className='h-8 w-8 text-red-600' />
         </div>
-        <h3 className='text-lg font-medium text-red-800 mb-2'>Error Loading Data</h3>
-        <p className='text-red-600'>{message}</p>
+        <div>
+          <h3 className='text-xl font-semibold text-red-800'>Something Went Wrong</h3>
+          <p className='mt-1 text-sm text-red-600'>{message}</p>
+        </div>
+        <Link href='/' className='mt-2 btn'>
+          Back to Home
+        </Link>
       </div>
     </div>
   );

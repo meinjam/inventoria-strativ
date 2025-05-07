@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { LuEye } from 'react-icons/lu';
 import CustomImage from '@/components/reusable/CustomImage.Component';
+import Image from 'next/image';
 
 interface Props {
   products: Product[];
@@ -27,8 +28,14 @@ const ProductTable = ({ products }: Props) => {
             <tr key={product.id} className='*:text-gray-900 *:first:font-medium'>
               <td className='px-3 py-2 whitespace-nowrap'>
                 <span className='flex items-center gap-2'>
-                  <span>
-                    <CustomImage src={product?.images[0]} />
+                  <span className='h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center'>
+                    <Image
+                      src={product?.images[0]}
+                      alt={product?.title}
+                      width={40}
+                      height={40}
+                      className='rounded-full size-10'
+                    />
                   </span>
                   <span>{product?.title}</span>
                 </span>

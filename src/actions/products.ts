@@ -3,7 +3,7 @@ import { baseUrl } from '@/utils/constants';
 
 export async function getProducts(): Promise<Product[]> {
   const response = await fetch(`${baseUrl}/products`, {
-    next: { revalidate: 3600 }, // Revalidate every hour
+    cache: 'no-store', // Disable caching
   });
 
   if (!response.ok) {
@@ -15,7 +15,8 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getProductBySlug(slug: string): Promise<Product> {
   const response = await fetch(`${baseUrl}/products/slug/${slug}`, {
-    next: { revalidate: 3600 }, // Revalidate every hour
+    // next: { revalidate: 3600 }, // Revalidate every hour
+    cache: 'no-store', // Disable caching
   });
 
   if (!response.ok) {
