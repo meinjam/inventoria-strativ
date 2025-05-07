@@ -1,33 +1,97 @@
+'use client';
+
 import { Product } from '@/types';
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { LuEye } from 'react-icons/lu';
 import Image from 'next/image';
+import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 
 interface Props {
   products: Product[];
 }
 
 const ProductTable = ({ products }: Props) => {
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  const [sortConfig, setSortConfig] = useState<{
+    key: 'title' | 'price';
+    direction: 'asc' | 'desc';
+  } | null>(null);
+
+  const handleSort = (key: 'title' | 'price') => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+
+    setSortConfig({ key, direction });
+
+    const sorted = [...filteredProducts].sort((a, b) => {
+      if (key === 'title') {
+        return direction === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+      }
+
+      if (key === 'price') {
+        return direction === 'asc' ? a.price - b.price : b.price - a.price;
+      }
+
+      return 0;
+    });
+
+    setFilteredProducts(sorted);
+  };
+
   return (
     <div className='overflow-x-auto rounded border border-gray-300 shadow-sm'>
       <table className='min-w-full divide-y-2 divide-gray-200'>
         <thead className='ltr:text-left rtl:text-right'>
           <tr className='*:font-medium *:text-gray-900'>
-            <th className='px-3 py-2 whitespace-nowrap'>Title</th>
-            <th className='px-3 py-2 whitespace-nowrap'>Price</th>
+            <th className='px-3 py-2 whitespace-nowrap cursor-pointer select-none' onClick={() => handleSort('title')}>
+              <span className='flex items-center gap-1 justify-between'>
+                Title
+                <span className='flex flex-col leading-none'>
+                  <FiChevronUp
+                    className={`size-4 ${
+                      sortConfig?.key === 'title' && sortConfig.direction === 'asc' ? 'text-black' : 'text-gray-400'
+                    }`}
+                  />
+                  <FiChevronDown
+                    className={`size-4 -mt-1 ${
+                      sortConfig?.key === 'title' && sortConfig.direction === 'desc' ? 'text-black' : 'text-gray-400'
+                    }`}
+                  />
+                </span>
+              </span>
+            </th>
+            <th className='px-3 py-2 whitespace-nowrap cursor-pointer select-none' onClick={() => handleSort('price')}>
+              <span className='flex items-center gap-1  justify-between'>
+                Price
+                <span className='flex flex-col leading-none'>
+                  <FiChevronUp
+                    className={`size-4 ${
+                      sortConfig?.key === 'price' && sortConfig.direction === 'asc' ? 'text-black' : 'text-gray-400'
+                    }`}
+                  />
+                  <FiChevronDown
+                    className={`size-4 -mt-1 ${
+                      sortConfig?.key === 'price' && sortConfig.direction === 'desc' ? 'text-black' : 'text-gray-400'
+                    }`}
+                  />
+                </span>
+              </span>
+            </th>
             <th className='px-3 py-2 whitespace-nowrap'>Category</th>
             <th className='px-3 py-2 whitespace-nowrap'>Created At</th>
             <th className='px-3 py-2 whitespace-nowrap'>Actions</th>
           </tr>
         </thead>
         <tbody className='divide-y divide-gray-200'>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <tr key={product.id} className='*:text-gray-900 *:first:font-medium'>
               <td className='px-3 py-2 whitespace-nowrap'>
                 <span className='flex items-center gap-2'>
-                  <span className='h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center'>
+                  {/* <span className='h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center'>
                     <Image
                       src={product?.images[0]}
                       alt={product?.title}
@@ -35,7 +99,7 @@ const ProductTable = ({ products }: Props) => {
                       height={40}
                       className='rounded-full size-10'
                     />
-                  </span>
+                  </span> */}
                   <span>{product?.title}</span>
                 </span>
               </td>

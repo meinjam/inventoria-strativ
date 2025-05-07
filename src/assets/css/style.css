@@ -14,3 +14,29 @@
 .btn {
   @apply cursor-pointer px-5 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition duration-300 ease-in-out;
 }
+
+/* overrides for rc-pagination */
+.custom-pagination {
+  @apply flex flex-wrap items-center gap-2;
+}
+
+.custom-pagination li {
+  @apply inline-flex items-center justify-center w-9 h-9 text-sm font-medium text-gray-700 rounded-full border border-gray-300 hover:bg-gray-100 transition;
+}
+
+.custom-pagination li.rc-pagination-item-active {
+  @apply bg-primary text-white border-primary;
+}
+
+.custom-pagination li.rc-pagination-prev,
+.custom-pagination li.rc-pagination-next {
+  @apply text-gray-700 border-gray-300 rounded-full hover:bg-gray-100 transition cursor-pointer;
+}
+
+.custom-pagination li.rc-pagination-disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+.custom-pagination li > a {
+  @apply w-full h-full flex items-center justify-center cursor-pointer;
+}

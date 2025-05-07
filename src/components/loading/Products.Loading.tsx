@@ -3,7 +3,6 @@ import React from 'react';
 const ProductsLoading = () => {
   return (
     <>
-      <h1 className='text-3xl font-bold mb-4'>Products</h1>
       <div className='overflow-x-auto rounded border border-gray-300 shadow-sm animate-pulse'>
         <table className='min-w-full divide-y-2 divide-gray-200'>
           <thead className='ltr:text-left rtl:text-right'>

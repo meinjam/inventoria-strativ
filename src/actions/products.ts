@@ -1,8 +1,8 @@
 import { Product } from '@/types';
 import { baseUrl } from '@/utils/constants';
 
-export async function getProducts(): Promise<Product[]> {
-  const response = await fetch(`${baseUrl}/products`, {
+export async function getProducts(page: string | string[], query: string | string[], limit = 10): Promise<Product[]> {
+  const response = await fetch(`${baseUrl}/products?offset=${page}&limit=${limit}&title=${query}`, {
     cache: 'no-store', // Disable caching
   });
 

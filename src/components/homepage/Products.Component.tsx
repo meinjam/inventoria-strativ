@@ -2,21 +2,26 @@ import { getProducts } from '@/actions/products';
 import React from 'react';
 import ErrorDisplay from '@/components/error/ErrorDisplay.Component';
 import ProductTable from '@/components/homepage/ProductTable.Component';
+import CustomPagination from '../reusable/CustomPagination.Component';
 
-const Products = async () => {
+type Props = {
+  query: string | string[];
+  currentPage: string | string[];
+};
+
+const Products = async ({ query, currentPage }: Props) => {
   try {
-    const products = await getProducts();
+    const products = await getProducts(currentPage, query);
     // console.log(products);
 
     return (
       <>
-        <h1 className='text-3xl font-bold mb-4'>Products</h1>
         <ProductTable products={products} />
+        <CustomPagination />
       </>
     );
   } catch (error) {
     <>
-      <h1 className='text-3xl font-bold mb-4'>Products</h1>
       <ErrorDisplay message={error instanceof Error ? error.message : 'Failed to load products'} />
     </>;
   }
