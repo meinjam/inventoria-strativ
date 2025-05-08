@@ -17,9 +17,7 @@ export async function getProducts(
   if (priceMax) params.append('price_max', priceMax.toString());
   if (categorySlug) params.append('categorySlug', categorySlug);
 
-  const response = await fetch(`${baseUrl}/products?${params.toString()}`, {
-    cache: 'no-store', // Disable caching
-  });
+  const response = await fetch(`${baseUrl}/products?${params.toString()}`);
 
   // console.log(response.url);
 
@@ -32,8 +30,7 @@ export async function getProducts(
 
 export async function getProductBySlug(slug: string): Promise<Product> {
   const response = await fetch(`${baseUrl}/products/slug/${slug}`, {
-    next: { revalidate: 3600 }, // Revalidate every hour
-    cache: 'force-cache', // Disable caching
+    cache: 'no-cache', // Disable caching
   });
 
   if (!response.ok) {

@@ -34,7 +34,9 @@ const PriceFilter = ({ priceMin, priceMax }: Props) => {
     }));
   };
 
-  const handleApply = () => {
+  const handleApply = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (price.min === '' && price.max === '') {
       toast.error('Please enter a price range');
       return;
@@ -58,7 +60,7 @@ const PriceFilter = ({ priceMin, priceMax }: Props) => {
   };
 
   return (
-    <div className='flex flex-wrap items-center gap-2'>
+    <form onSubmit={handleApply} className='flex flex-wrap items-center gap-2'>
       <input
         className='block w-32 rounded-md border border-gray-200 px-3 py-[9px] text-sm outline-none placeholder:text-gray-500'
         placeholder='min price'
@@ -77,10 +79,10 @@ const PriceFilter = ({ priceMin, priceMax }: Props) => {
         value={price.max}
         onChange={handlePriceRange}
       />
-      <button className={'btn'} onClick={handleApply}>
+      <button className={'btn'} type='submit'>
         Apply Range
       </button>
-    </div>
+    </form>
   );
 };
 
