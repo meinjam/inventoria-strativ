@@ -40,7 +40,7 @@ export async function getProductBySlug(slug: string): Promise<Product> {
     throw new Error(`Failed to fetch product: ${response.status} ${response.statusText}`);
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
+  // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
 
   return response.json();
 }
