@@ -34,7 +34,7 @@ const CategoryFilterOptions = ({ categories, categorySlug }: Props) => {
     <select
       defaultValue={categorySlug}
       onChange={handleCategory}
-      className='block rounded border border-gray-200 px-3 py-[9px] text-sm outline-none placeholder:text-gray-500'
+      className='block w-52 rounded-md border border-gray-200 px-3 py-[9px] text-sm outline-none placeholder:text-gray-500'
     >
       <option value=''>All Categories</option>
       {categories?.map((category) => (

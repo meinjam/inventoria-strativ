@@ -1,4 +1,4 @@
-import { getCategories } from '@/actions/products';
+import { getCategories } from '@/actions/categories';
 import React from 'react';
 import CategoryFilterOptions from '@/components/homepage/CategoryFilterOptions.Component';
 
