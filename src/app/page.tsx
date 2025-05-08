@@ -25,7 +25,7 @@ export default async function Home({ searchParams }: Props) {
   return (
     <section className='my-10'>
       <div className='container'>
-        <h1 className='text-3xl font-bold mb-4'>Products</h1>
+        <h1 className='mb-4 text-3xl font-bold'>Products</h1>
         <Search placeholder='Search by name...' query={query} />
         <Suspense fallback={<ProductsLoading />} key={query + currentPage + priceMin + priceMax + categorySlug}>
           <Products

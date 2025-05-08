@@ -43,7 +43,7 @@ async function SingleProduct({ params }: Props) {
     return (
       <section className='my-10'>
         <div className='container'>
-          <div className='flex items-center gap-3 flex-wrap mb-8'>
+          <div className='mb-8 flex flex-wrap items-center gap-3'>
             <h1 className='text-2xl font-bold'>Product Details</h1>
             <NavigationBtn title='Go Back' type='back' />
           </div>
@@ -56,7 +56,7 @@ async function SingleProduct({ params }: Props) {
     return (
       <section className='my-10'>
         <div className='container'>
-          <h1 className='text-3xl font-bold mb-4'>Product Details</h1>
+          <h1 className='mb-4 text-3xl font-bold'>Product Details</h1>
           <ErrorDisplay message={error instanceof Error ? error.message : 'Failed to load product'} />
         </div>
       </section>

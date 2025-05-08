@@ -47,8 +47,8 @@ const ProductTable = ({ products }: Props) => {
       <table className='min-w-full divide-y-2 divide-gray-200'>
         <thead className='ltr:text-left rtl:text-right'>
           <tr className='*:font-medium *:text-gray-900'>
-            <th className='px-3 py-2 whitespace-nowrap cursor-pointer select-none' onClick={() => handleSort('title')}>
-              <span className='flex items-center gap-1 justify-between'>
+            <th className='cursor-pointer px-3 py-2 whitespace-nowrap select-none' onClick={() => handleSort('title')}>
+              <span className='flex items-center justify-between gap-1'>
                 Title
                 <span className='flex flex-col leading-none'>
                   <FiChevronUp
@@ -57,15 +57,15 @@ const ProductTable = ({ products }: Props) => {
                     }`}
                   />
                   <FiChevronDown
-                    className={`size-4 -mt-1 ${
+                    className={`-mt-1 size-4 ${
                       sortConfig?.key === 'title' && sortConfig.direction === 'desc' ? 'text-black' : 'text-gray-400'
                     }`}
                   />
                 </span>
               </span>
             </th>
-            <th className='px-3 py-2 whitespace-nowrap cursor-pointer select-none' onClick={() => handleSort('price')}>
-              <span className='flex items-center gap-1  justify-between'>
+            <th className='cursor-pointer px-3 py-2 whitespace-nowrap select-none' onClick={() => handleSort('price')}>
+              <span className='flex items-center justify-between gap-1'>
                 Price
                 <span className='flex flex-col leading-none'>
                   <FiChevronUp
@@ -74,7 +74,7 @@ const ProductTable = ({ products }: Props) => {
                     }`}
                   />
                   <FiChevronDown
-                    className={`size-4 -mt-1 ${
+                    className={`-mt-1 size-4 ${
                       sortConfig?.key === 'price' && sortConfig.direction === 'desc' ? 'text-black' : 'text-gray-400'
                     }`}
                   />
@@ -89,7 +89,7 @@ const ProductTable = ({ products }: Props) => {
         <tbody className='divide-y divide-gray-200'>
           {filteredProducts.length === 0 && (
             <tr>
-              <td colSpan={5} className='px-3 py-5 whitespace-nowrap text-center'>
+              <td colSpan={5} className='px-3 py-5 text-center whitespace-nowrap'>
                 <span className='text-gray-500'>Sorry, no products found</span>
               </td>
             </tr>

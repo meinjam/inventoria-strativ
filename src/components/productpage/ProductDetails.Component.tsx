@@ -9,8 +9,8 @@ interface Props {
 
 const ProductDetails = ({ product }: Props) => {
   return (
-    <div className='max-w-5xl mx-auto'>
-      <div className='grid md:grid-cols-2 gap-8 items-start'>
+    <div className='mx-auto max-w-5xl'>
+      <div className='grid items-start gap-8 md:grid-cols-2'>
         {/* Product Image */}
         <ProductImg images={product?.images} />
 
@@ -18,15 +18,15 @@ const ProductDetails = ({ product }: Props) => {
         <div className='space-y-5'>
           <h1 className='text-3xl font-bold text-gray-900'>{product?.title}</h1>
 
-          <span className='inline-block bg-gray-100 capitalize text-gray-700 text-sm px-3 py-1 rounded-full border border-gray-300'>
+          <span className='inline-block rounded-full border border-gray-300 bg-gray-100 px-3 py-1 text-sm text-gray-700 capitalize'>
             Category: {product?.category?.name}
           </span>
 
-          <p className='text-2xl font-semibold text-primary'>${product?.price}</p>
+          <p className='text-primary text-2xl font-semibold'>${product?.price}</p>
 
           <div>
-            <h2 className='text-lg font-semibold text-gray-800 mb-1'>Description</h2>
-            <p className='text-gray-600 leading-relaxed'>{product?.description}</p>
+            <h2 className='mb-1 text-lg font-semibold text-gray-800'>Description</h2>
+            <p className='leading-relaxed text-gray-600'>{product?.description}</p>
           </div>
 
           <div className='text-sm text-gray-400'>
@@ -44,7 +44,7 @@ const ProductDetails = ({ product }: Props) => {
             </p>
           </div>
 
-          <a href='#' className='inline-block mt-4 btn'>
+          <a href='#' className='btn mt-4 inline-block'>
             Add To Cart
           </a>
         </div>

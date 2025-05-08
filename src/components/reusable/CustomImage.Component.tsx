@@ -13,7 +13,7 @@ const CustomImage = ({ src }: { src: string }) => {
       alt={'Product image'}
       width={40}
       height={40}
-      className='rounded-full size-10'
+      className='size-10 rounded-full'
       placeholder='blur'
       blurDataURL={imgSrc}
       priority

@@ -12,7 +12,7 @@ const ProductImg = ({ images }: { images: string[] }) => {
 
   return (
     <div className='w-full'>
-      <div className='relative aspect-square h-full max-h-[300px] md:max-h-[500px] w-full overflow-hidden bg-gray-200 rounded-2xl'>
+      <div className='relative aspect-square h-full max-h-[300px] w-full overflow-hidden rounded-2xl bg-gray-200 md:max-h-[500px]'>
         <Image
           src={mainImgSrc}
           fill
@@ -26,7 +26,7 @@ const ProductImg = ({ images }: { images: string[] }) => {
       </div>
 
       {images.length > 1 && (
-        <div className='flex gap-4 py-4 justify-center overflow-x-auto'>
+        <div className='flex justify-center gap-4 overflow-x-auto py-4'>
           {images.map((image, i) => (
             <Image
               key={i}
@@ -34,7 +34,7 @@ const ProductImg = ({ images }: { images: string[] }) => {
               width={80}
               height={80}
               alt={`Thumbnail ${i + 1}`}
-              className='size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300'
+              className='size-16 cursor-pointer rounded-md object-cover opacity-60 transition duration-300 hover:opacity-100 sm:size-20'
               onClick={() => handleChangeSrc(image)}
               placeholder='blur'
               blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN89R8AAtkB6zy+wn8AAAAASUVORK5CYII='

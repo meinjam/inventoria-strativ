@@ -1,12 +1,18 @@
 'use client';
 
+import { cn } from '@/lib/cn';
+import { paginationLimit } from '@/utils/constants';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Pagination from 'rc-pagination';
 import React from 'react';
-import { IoChevronBackOutline } from 'react-icons/io5';
-// import 'rc-pagination/assets/index.css'; // optional if you want base styles
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
-const CustomPagination = () => {
+interface Props {
+  total: number;
+  current: number;
+}
+
+const CustomPagination = ({ total, current }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
@@ -18,27 +24,49 @@ const CustomPagination = () => {
     const params = new URLSearchParams(searchParams);
     params.set('page', String(current));
 
-    push(`${pathname}?${params.toString()}`);
+    push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  const itemRender = (currentPage: number, type: string, element: React.ReactNode) => {
+    if (type === 'page') {
+      return (
+        <button
+          className={cn(
+            'mx-1 flex size-8 cursor-pointer items-center justify-center rounded-full duration-300',
+            currentPage === current ? 'bg-primary text-white' : 'text-black hover:bg-gray-100'
+          )}
+        >
+          {currentPage}
+        </button>
+      );
+    }
+    if (type === 'prev') {
+      return (
+        <button className='flex size-8 cursor-pointer items-center justify-center rounded-full text-black duration-300 hover:bg-gray-100'>
+          <IoIosArrowBack className='size-4' />
+        </button>
+      );
+    }
+    if (type === 'next') {
+      return (
+        <button className='flex size-8 cursor-pointer items-center justify-center rounded-full text-black duration-300 hover:bg-gray-100'>
+          <IoIosArrowForward className='size-4' />
+        </button>
+      );
+    }
+    return element;
   };
 
   return (
-    <div className='flex justify-end mt-4'>
+    <div className='mt-4 flex justify-end'>
       <Pagination
-        defaultCurrent={1}
-        defaultPageSize={10}
-        total={50}
+        current={current}
+        total={total}
         onChange={handlePagination}
-        className='custom-pagination'
-        prevIcon={
-          <span className='text-gray-500'>
-            <IoChevronBackOutline />
-          </span>
-        }
-        nextIcon={
-          <span className='text-gray-500'>
-            <IoChevronBackOutline className='rotate-180' />
-          </span>
-        }
+        defaultPageSize={paginationLimit}
+        className='flex items-center justify-center'
+        showTitle={false}
+        itemRender={itemRender}
       />
     </div>
   );

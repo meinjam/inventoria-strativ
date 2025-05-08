@@ -3,7 +3,7 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <nav className='bg-primary text-white py-4'>
+    <nav className='bg-primary py-4 text-white'>
       <div className='container'>
         <h2>
           <Link href='/' className='text-3xl font-bold'>
