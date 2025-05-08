@@ -30,7 +30,7 @@ const Search = ({ placeholder, query }: Props) => {
   }, 500);
 
   return (
-    <div className='mb-4 flex'>
+    <div className='flex'>
       <div className='relative'>
         <label htmlFor='search' className='sr-only'>
           Search

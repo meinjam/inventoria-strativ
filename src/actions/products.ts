@@ -1,4 +1,4 @@
-import { Product } from '@/types';
+import { Category, Product } from '@/types';
 import { baseUrl, paginationLimit } from '@/utils/constants';
 
 export async function getProducts(
@@ -32,8 +32,8 @@ export async function getProducts(
 
 export async function getProductBySlug(slug: string): Promise<Product> {
   const response = await fetch(`${baseUrl}/products/slug/${slug}`, {
-    // next: { revalidate: 3600 }, // Revalidate every hour
-    cache: 'no-store', // Disable caching
+    next: { revalidate: 3600 }, // Revalidate every hour
+    cache: 'force-cache', // Disable caching
   });
 
   if (!response.ok) {
@@ -41,6 +41,18 @@ export async function getProductBySlug(slug: string): Promise<Product> {
   }
 
   //   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
+
+  return response.json();
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const response = await fetch(`${baseUrl}/categories`, {
+    cache: 'no-store', // Disable caching
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch categories: ${response.status} ${response.statusText}`);
+  }
 
   return response.json();
 }

@@ -1,3 +1,4 @@
+import CategoryFilter from '@/components/homepage/CategoryFilter.Component';
 import Products from '@/components/homepage/Products.Component';
 import Search from '@/components/homepage/Search.Component';
 import ProductsLoading from '@/components/loading/Products.Loading';
@@ -26,7 +27,10 @@ export default async function Home({ searchParams }: Props) {
     <section className='my-10'>
       <div className='container'>
         <h1 className='mb-4 text-3xl font-bold'>Products</h1>
-        <Search placeholder='Search by name...' query={query} />
+        <div className='mb-4 flex items-center gap-3'>
+          <Search placeholder='Search by name...' query={query} />
+          <CategoryFilter categorySlug={categorySlug} />
+        </div>
         <Suspense fallback={<ProductsLoading />} key={query + currentPage + priceMin + priceMax + categorySlug}>
           <Products
             query={query}
