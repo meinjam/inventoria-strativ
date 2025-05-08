@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
@@ -14,6 +14,11 @@ const Search = ({ placeholder, query }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
+  const [search, setSearch] = useState<string>(query || '');
+
+  useEffect(() => {
+    setSearch(query || '');
+  }, [query]);
 
   const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
@@ -38,8 +43,11 @@ const Search = ({ placeholder, query }: Props) => {
         <input
           className='block w-52 rounded-md border border-gray-200 py-[9px] pr-3 pl-10 text-sm outline-none placeholder:text-gray-500'
           placeholder={placeholder}
-          onChange={(e) => handleSearch(e.target.value)}
-          defaultValue={query?.toString() || ''}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            handleSearch(e.target.value);
+          }}
         />
         <CiSearch className='absolute top-1/2 left-3 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900' />
       </div>

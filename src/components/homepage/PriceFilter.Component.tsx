@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface Props {
@@ -18,6 +18,13 @@ const PriceFilter = ({ priceMin, priceMax }: Props) => {
     min: priceMin || '',
     max: priceMax || '',
   });
+
+  useEffect(() => {
+    setPrice({
+      min: priceMin || '',
+      max: priceMax || '',
+    });
+  }, [priceMin, priceMax]);
 
   const handlePriceRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

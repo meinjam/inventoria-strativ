@@ -2,7 +2,7 @@
 
 import { Category } from '@/types';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
   categories: Category[];
@@ -13,9 +13,15 @@ const CategoryFilterOptions = ({ categories, categorySlug }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { push } = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState<string>(categorySlug || '');
+
+  useEffect(() => {
+    setSelectedCategory(categorySlug || '');
+  }, [categorySlug]);
 
   const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
+    setSelectedCategory(value);
 
     const params = new URLSearchParams(searchParams);
 
@@ -32,7 +38,7 @@ const CategoryFilterOptions = ({ categories, categorySlug }: Props) => {
 
   return (
     <select
-      defaultValue={categorySlug}
+      value={categorySlug}
       onChange={handleCategory}
       className='block w-52 rounded-md border border-gray-200 px-3 py-[9px] text-sm outline-none placeholder:text-gray-500'
     >
