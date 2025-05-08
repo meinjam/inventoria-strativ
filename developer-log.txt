@@ -1,4 +1,13 @@
-1. https://api.escuelajs.co/api/v1/products the api only provide only products not meta data like total count, page or limit. So, how I show pagination? I dont know total item and I dont know how many pages it have.
-2. the api does not provide search with description? How how I implement search with description?
-3. the api does not provide any sorting like name or price with asc and desc. Can I make the sort in client side with current table data in client side?
-4. the api does not support multiple category selection filtering. You can only select one category once. How what can i do?
+1.Pagination:
+The API endpoint (https://api.escuelajs.co/api/v1/products) returns only the product data without any metadata such as total item count, page number, or limit. As a result, I'm unsure how to implement proper pagination since I don’t know the total number of items or how many pages there are.
+
+2. Search Functionality:
+   The API does not seem to support searching within product descriptions. Could you advise on how I might implement a search feature that includes the description field?
+
+3. Sorting:
+   Sorting by fields such as name or price in ascending or descending order is not available via the API. Would it be acceptable to implement client-side sorting using the current data loaded in the table?
+
+4. Multiple Category Filtering:
+   Currently, the API supports filtering by only one category at a time. Is there a recommended way to support filtering by multiple categories simultaneously?
+
+I can make all thing in client side but api does not provide your requirement.

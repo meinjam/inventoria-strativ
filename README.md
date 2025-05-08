@@ -56,7 +56,9 @@
 
 - Create a .env file in the root of the project and add the following:
 
-  > `BASE_URL="https://api.escuelajs.co/api/v1"`
+  > ```bash
+  > BASE_URL="https://api.escuelajs.co/api/v1"
+  > ```
 
 - Run the code after installing the libraries
 

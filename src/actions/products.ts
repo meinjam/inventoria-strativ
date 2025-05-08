@@ -21,7 +21,7 @@ export async function getProducts(
     cache: 'no-store', // Disable caching
   });
 
-  console.log(response.url);
+  // console.log(response.url);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`);
@@ -40,7 +40,7 @@ export async function getProductBySlug(slug: string): Promise<Product> {
     throw new Error(`Failed to fetch product: ${response.status} ${response.statusText}`);
   }
 
-  //   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
 
   return response.json();
 }
