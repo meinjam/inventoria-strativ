@@ -10,4 +10,4 @@ The API endpoint (https://api.escuelajs.co/api/v1/products) returns only the pro
 4. Multiple Category Filtering:
    Currently, the API supports filtering by only one category at a time. Is there a recommended way to support filtering by multiple categories simultaneously?
 
-I can make all thing in client side but api does not provide your requirement.
+N.B: I am not sure, probably the api does not fulfill our requirement. Another approach is I can fetch all data once and can make pagination, search, filter, sort and whatever you want in client side. If you want I can make it.
